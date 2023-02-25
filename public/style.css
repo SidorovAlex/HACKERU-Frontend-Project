@@ -7,6 +7,10 @@ li,
 ul {
   list-style: none;
   padding-left: 0;
+  width: 30%;
+}
+.tast-options {
+  padding-right: 5px;
 }
 body {
   background: grey;

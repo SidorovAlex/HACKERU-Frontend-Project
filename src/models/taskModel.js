@@ -1,10 +1,13 @@
 class Task {
+  id;
   theTask;
-  status;
   timeLeftToDo;
+  status;
 
-  constructor() {
-    this.status = "Uncompleted";
+  constructor(theTask, timeLeftToDo, status) {
+    this.theTask = theTask;
+    this.timeLeftToDo = timeLeftToDo;
+    this.status = "undefined";
   }
 }
 

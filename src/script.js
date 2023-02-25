@@ -1,37 +1,18 @@
-const taskInput = document.querySelector(".task-input");
-const taskVal = document.querySelector(".tsInput");
-const taskList = document.querySelector(".task-list");
+import Task from "./models/taskModel.js";
+import TaskManager from "../src/models/taskManagerModel.js";
+import {
+  ADD_TASK,
+  TASK_INP,
+  TASK_LIST,
+  DELETE_TASK,
+} from "../src/models/DOMModel.js";
 
-let tasks = JSON.parse(localStorage.getItem("task-list"));
+let taskManager = new TaskManager();
 
-function showTasks() {
-  let li = "";
-  if (tasks) {
-    tasks.forEach((task, id) => {
-      li += `<li id="task" class="d-flex"></li>
-            <label for="${id}" class="d-flex">
-              <input type="checkbox" id="${id}" />
-              <p>${task.name}</p>
-            </label>
-            <div class="tast-options">
-              <span class="cursor">Delete</span>
-              <span class="cursor">Edite</span>
-            </div>
-          </li>`;
-    });
-  }
-
-  taskList.innerHTML = li;
-}
-
-taskInput.addEventListener("keyup", (e) => {
-  const value = taskVal.value.trim();
-  if (e.key === "Enter" && value) {
-    if (!tasks) tasks = [];
-    taskVal.value = [];
-    let taskClass = { name: value, status: "pending" };
-    tasks.push(taskClass);
-    localStorage.setItem("task-list", JSON.stringify(tasks));
-    showTasks();
-  }
+ADD_TASK?.addEventListener("click", () => {
+  let task = new Task();
+  task.theTask = TASK_INP.value;
+  task.timeLeftToDo = 28;
+  taskManager.addTask(task);
+  taskManager.showTasks();
 });
