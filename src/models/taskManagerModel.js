@@ -13,20 +13,56 @@ class TaskManager {
     if (this.TaskManager) {
       this.TaskManager.forEach((task) => {
         let list = document.createElement("li");
-        let spanWithValue = document.createElement("span");
-        let spanWithBtn = document.createElement("button");
+        let taskSp = document.createElement("span");
+        let deleteBtn = document.createElement("button");
+        let editeBtn = document.createElement("button");
+        let checkBoxInp = document.createElement("input");
+        checkBoxInp.setAttribute("type","checkbox");
+        
+        if(task.status === "Completed")
+          taskSp.classList.add("checked");
 
-        spanWithValue.innerText = TASK_INP.value;
-        spanWithBtn.innerText = "Delete";
-        spanWithBtn.style.color = "red";
 
-        spanWithBtn.addEventListener("click", () => {
-          console.log("Asdasd");
-          this.deleteTask(task.ida);
+
+        taskSp.innerText = task.theTask;
+        deleteBtn.innerText = "Delete";
+        deleteBtn.style.color = "red";
+
+        editeBtn.innerText = "Edit";
+        editeBtn.style.color = "blue"
+
+        deleteBtn.addEventListener("click", () => {
+          this.deleteTask(task.id);
+        });
+        editeBtn.addEventListener("click",()=>{
+          if(editeBtn.innerText === "Edit")
+          {
+            editeBtn.innerHTML = "Save";
+            taskSp.setAttribute("contenteditable",true);
+          }
+          else{
+            editeBtn.innerText = "Edit";
+            taskSp.setAttribute("contenteditable",false);
+            task.theTask= taskSp.innerText;
+          }
         });
 
-        list.appendChild(spanWithValue);
-        list.appendChild(spanWithBtn);
+        checkBoxInp.addEventListener("click",()=>{
+          if(checkBoxInp.checked){
+            taskSp.classList.add("checked")
+            task.status = "Completed"
+          }
+          else{
+            task.status = "Uncompleted"
+            taskSp.classList.remove("checked")
+          }
+        })
+        
+
+        list.appendChild(checkBoxInp);
+        list.appendChild(taskSp);
+        list.appendChild(editeBtn);
+        list.appendChild(deleteBtn);
 
         TASK_LIST.appendChild(list);
       });
@@ -36,16 +72,23 @@ class TaskManager {
   addTask(task) {
     let val = TASK_INP.value.trim();
     if (val) {
-      this.taskCounter += 1;
       task.id = this.taskCounter;
+      this.taskCounter += 1;
       this.TaskManager.push(task);
     }
-  }
-  deleteTask(id) {
-    this.TaskManager.splice(id, 1);
     this.showTasks();
   }
-  edite() {}
+  deleteTask(id) {
+    let i=0;
+    this.TaskManager.splice(id, 1);
+    this.taskCounter -= 1;
+    this.TaskManager.forEach(task =>{
+      task.id=i;
+      i++;
+    })
+   
+    this.showTasks();
+  }
 }
 
 export default TaskManager;
