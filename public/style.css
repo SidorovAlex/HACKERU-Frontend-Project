@@ -3,11 +3,12 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 li,
 ul {
   list-style: none;
   padding-left: 0;
-  width: 30%;
+  width: 50%;
 }
 .tast-options {
   padding-right: 5px;
@@ -30,4 +31,8 @@ span {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.checked{
+  text-decoration: line-through;
 }
