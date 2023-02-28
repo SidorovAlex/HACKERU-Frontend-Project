@@ -36,3 +36,6 @@ span {
 .checked{
   text-decoration: line-through;
 }
+.redNotice{
+  color: red;
+}

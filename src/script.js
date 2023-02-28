@@ -9,6 +9,8 @@ import {
   SHOW_UNCOMPLETED_TASKS,
   SHOW_ALL_TASKS,
   CLEAR_ALL_TASKS,
+  DATE_END_TASK,
+  
 } from "../src/models/DOMModel.js";
 
 let taskManager = new TaskManager();
@@ -20,9 +22,9 @@ if(checkLocalStorage)
 ADD_TASK?.addEventListener("click", () => {
   let task = new Task();
   task.theTask = TASK_INP.value;
-  task.timeLeftToDo = 28;
   taskManager.addTask(task);
   TASK_INP.value ="";
+  DATE_END_TASK.value="";
   taskManager.showTasks();
 });
 
@@ -37,7 +39,6 @@ SHOW_ALL_TASKS?.addEventListener("click",()=>{
 });
 
 CLEAR_ALL_TASKS?.addEventListener("click",()=>{
-  console.log("haha")
     taskManager.deleteAllTasks();
 })
 
