@@ -2,6 +2,7 @@ import Task from "./taskModel.js";
 import { TASK_LIST, TASK_INP,DATE_END_TASK } from "./DOMModel.js";
 import { addItemToLocalStorage,removeItemfromLocalStorage } from "../services/localStorageService.js";
 
+
 class TaskManager {
   taskCounter;
   constructor(taskCounter) {
@@ -16,21 +17,28 @@ class TaskManager {
         let list = document.createElement("li");
         let taskSp = document.createElement("span");
         let deleteBtn = document.createElement("button");
-        let editeBtn = document.createElement("button");
+        let editBtn = document.createElement("button");
         let checkBoxInp = document.createElement("input");
         let timeLeftToEnd = document.createElement("span")
         checkBoxInp.setAttribute("type","checkbox");
         
-        
+        if(this.checkIfTheDateValid(task.dateToEnd)) {
+          timeLeftToEnd.classList.add("redNotice");
+         }
         if(task.status === "Completed"){
           taskSp.classList.add("checked");
           checkBoxInp.setAttribute("checked","true");
+          timeLeftToEnd.classList.remove("redNotice");
         }
+       
+        
         checkBoxInp?.addEventListener("click",()=>{
           if(taskSp.classList.contains("checked")){
             task.status="Uncompleted";
             addItemToLocalStorage("task-list",JSON.stringify(this.TaskManager));
-            timeLeftToEnd.classList.remove("redNotice");
+            if(this.checkIfTheDateValid(task.dateToEnd)) {
+              timeLeftToEnd.classList.add("redNotice");
+             }
           }else{
             task.status="Completed";
             addItemToLocalStorage("task-list",JSON.stringify(this.TaskManager));
@@ -43,27 +51,25 @@ class TaskManager {
         taskSp.innerText = task.theTask;
 
         
-         if(this.checkIfTheDateValid(task.dateToEnd)) {
-          timeLeftToEnd.classList.add("redNotice");
-         }
+         
          
         deleteBtn.innerText = "Delete";
         deleteBtn.style.color = "red";
 
-        editeBtn.innerText = "Edit";
-        editeBtn.style.color = "blue"
+        editBtn.innerText = "Edit";
+        editBtn.style.color = "blue"
 
         deleteBtn.addEventListener("click", () => {
           this.deleteTask(task.id);
         });
-        editeBtn.addEventListener("click",()=>{
-          if(editeBtn.innerText === "Edit")
+        editBtn.addEventListener("click",()=>{
+          if(editBtn.innerText === "Edit")
           {
-            editeBtn.innerHTML = "Save";
+            editBtn.innerHTML = "Save";
             taskSp.setAttribute("contenteditable",true);
           }
           else{
-            editeBtn.innerText = "Edit";
+            editBtn.innerText = "Edit";
             taskSp.setAttribute("contenteditable",false);
             task.theTask= taskSp.innerText;
             addItemToLocalStorage("task-list",JSON.stringify(this.TaskManager));
@@ -85,44 +91,13 @@ class TaskManager {
         list.appendChild(checkBoxInp);
         list.appendChild(taskSp);
         list.appendChild(timeLeftToEnd);
-        list.appendChild(editeBtn);
+        list.appendChild(editBtn);
         list.appendChild(deleteBtn);
 
         TASK_LIST.appendChild(list);
       });
     }
   }
-  checkIfTheDateValid(taskDateToEnd) {
-   
-    const inpDate = new Date(taskDateToEnd);
-    const currDate = new Date();
-    
-
-    const day1 = inpDate.getDate();
-    const month1 = inpDate.getMonth()+1;
-    const year1 = inpDate.getFullYear();
-
-    const day2 = currDate.getDate();
-    const month2 = currDate.getMonth()+1;
-    const year2 = currDate.getFullYear(); 
-   
-
-    if(year2>year1)
-      return true;
-    else if(year2===year1){
-      if(month2>month1)
-      return true;
-    else if(month2===month1){
-      if(day2>day1)
-    return true;
-    else if(day2===day1)
-      return false;
-    }
-    }else return false
-      
-  
-}
-
   showOnlyCompleted(){
     TASK_LIST.innerHTML = "";
     let li = "";
@@ -131,72 +106,75 @@ class TaskManager {
         let list = document.createElement("li");
         let taskSp = document.createElement("span");
         let deleteBtn = document.createElement("button");
-        let editeBtn = document.createElement("button");
+        let editBtn = document.createElement("button");
         let checkBoxInp = document.createElement("input");
         let timeLeftToEnd = document.createElement("span")
         checkBoxInp.setAttribute("type","checkbox");
-        checkBoxInp.setAttribute("checked","true");
         
+        if(this.checkIfTheDateValid(task.dateToEnd)) {
+          timeLeftToEnd.classList.add("redNotice");
+         }
         if(task.status === "Completed"){
           taskSp.classList.add("checked");
-
-
-          timeLeftToEnd.innerText = "End date of the task: " +task.dateToEnd;
-          taskSp.innerText = task.theTask;
-          taskSp.innerText = task.theTask;
-          deleteBtn.innerText = "Delete";
-          deleteBtn.style.color = "red";
-
-          editeBtn.innerText = "Edit";
-          editeBtn.style.color = "blue"
-
-          deleteBtn.addEventListener("click", () => {
-            this.deleteTask(task.id);
-          });
-          editeBtn.addEventListener("click",()=>{
-            if(editeBtn.innerText === "Edit")
-            {
-              editeBtn.innerHTML = "Save";
-              taskSp.setAttribute("contenteditable",true);
-            }
-            else{
-              editeBtn.innerText = "Edit";
-              taskSp.setAttribute("contenteditable",false);
-              task.theTask= taskSp.innerText;
-              addItemToLocalStorage("task-list",JSON.stringify(this.TaskManager));
-            }
-          });
+          checkBoxInp.setAttribute("checked","true");
+          timeLeftToEnd.classList.remove("redNotice");
 
           checkBoxInp?.addEventListener("click",()=>{
             if(taskSp.classList.contains("checked")){
               task.status="Uncompleted";
+              taskSp.classList.remove("checked")
               addItemToLocalStorage("task-list",JSON.stringify(this.TaskManager));
               if(this.checkIfTheDateValid(task.dateToEnd)) {
+                timeLeftToEnd.classList.add("redNotice");
                }
             }else{
               task.status="Completed";
+              taskSp.classList.add("checked")
               addItemToLocalStorage("task-list",JSON.stringify(this.TaskManager));
               timeLeftToEnd.classList.remove("redNotice");
             }
-            
           })
+          
   
           timeLeftToEnd.innerText = "End date of the task: " + task.dateToEnd.toString();
           taskSp.innerText = task.theTask;
   
           
-           if(this.checkIfTheDateValid(task.dateToEnd)) {
-            timeLeftToEnd.classList.add("redNotice");
-           }
-        
-
+         
+           
+          deleteBtn.innerText = "Delete";
+          deleteBtn.style.color = "red";
+  
+          editBtn.innerText = "Edit";
+          editBtn.style.color = "blue"
+  
+          deleteBtn.addEventListener("click", () => {
+            this.deleteTask(task.id);
+          });
+          editBtn.addEventListener("click",()=>{
+            if(editBtn.innerText === "Edit")
+            {
+              editBtn.innerHTML = "Save";
+              taskSp.setAttribute("contenteditable",true);
+            }
+            else{
+              editBtn.innerText = "Edit";
+              taskSp.setAttribute("contenteditable",false);
+              task.theTask= taskSp.innerText;
+              addItemToLocalStorage("task-list",JSON.stringify(this.TaskManager));
+            }
+          });
+  
+          
+          
+          
           list.appendChild(checkBoxInp);
           list.appendChild(taskSp);
           list.appendChild(timeLeftToEnd);
-          list.appendChild(editeBtn);
+          list.appendChild(editBtn);
           list.appendChild(deleteBtn);
-
-         TASK_LIST.appendChild(list);
+  
+          TASK_LIST.appendChild(list);
         }
       });
     }
@@ -209,7 +187,7 @@ class TaskManager {
         let list = document.createElement("li");
         let taskSp = document.createElement("span");
         let deleteBtn = document.createElement("button");
-        let editeBtn = document.createElement("button");
+        let editBtn = document.createElement("button");
         let checkBoxInp = document.createElement("input");
         let timeLeftToEnd = document.createElement("span")
         checkBoxInp.setAttribute("type","checkbox");
@@ -221,13 +199,13 @@ class TaskManager {
         deleteBtn.innerText = "Delete";
         deleteBtn.style.color = "red";
 
-        editeBtn.innerText = "Edit";
-        editeBtn.style.color = "blue"
+        editBtn.innerText = "Edit";
+        editBtn.style.color = "blue"
 
         deleteBtn.addEventListener("click", () => {
           this.deleteTask(task.id);
         });
-        editeBtn.addEventListener("click",()=>{
+        editBtn.addEventListener("click",()=>{
           if(editeBtn.innerText === "Edit")
           {
             editeBtn.innerHTML = "Save";
@@ -244,15 +222,20 @@ class TaskManager {
         checkBoxInp?.addEventListener("click",()=>{
           if(taskSp.classList.contains("checked")){
             task.status="Uncompleted";
+            taskSp.classList.remove("checked")
             addItemToLocalStorage("task-list",JSON.stringify(this.TaskManager));
-            timeLeftToEnd.classList.add("redNotice");
+            if(this.checkIfTheDateValid(task.dateToEnd)) {
+              timeLeftToEnd.classList.add("redNotice");
+             }
           }else{
             task.status="Completed";
+            taskSp.classList.add("checked")
             addItemToLocalStorage("task-list",JSON.stringify(this.TaskManager));
             timeLeftToEnd.classList.remove("redNotice");
           }
-          
         })
+
+        
 
         timeLeftToEnd.innerText = "End date of the task: " + task.dateToEnd.toString();
         taskSp.innerText = task.theTask;
@@ -266,7 +249,7 @@ class TaskManager {
         list.appendChild(checkBoxInp);
         list.appendChild(taskSp);
         list.appendChild(timeLeftToEnd);
-        list.appendChild(editeBtn);
+        list.appendChild(editBtn);
         list.appendChild(deleteBtn);
 
         TASK_LIST.appendChild(list);
@@ -274,6 +257,7 @@ class TaskManager {
       });
     }
   }
+
 
   addTask(task) {
     let val = TASK_INP.value.trim();
@@ -319,6 +303,35 @@ class TaskManager {
     removeItemfromLocalStorage("task-list",JSON.stringify(this.TaskManager));
     this.showTasks();
   }
+  checkIfTheDateValid(taskDateToEnd) {
+    const inpDate = new Date(taskDateToEnd);
+    const currDate = new Date();
+    
+
+    const day1 = inpDate.getDate();
+    const month1 = inpDate.getMonth()+1;
+    const year1 = inpDate.getFullYear();
+
+    const day2 = currDate.getDate();
+    const month2 = currDate.getMonth()+1;
+    const year2 = currDate.getFullYear(); 
+   
+
+    if(year2>year1)
+      return true;
+    else if(year2===year1){
+      if(month2>month1)
+      return true;
+    else if(month2===month1){
+      if(day2>day1)
+    return true;
+    else if(day2===day1)
+      return false;
+    }
+    }else return false
+      
+  
+}
 }
 
 export default TaskManager;

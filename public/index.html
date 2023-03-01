@@ -14,22 +14,23 @@
     <title>Task Manager</title>
   </head>
   <body>
-    <main class="main-conteiner">
-      <h1>Task Manager</h1>
-      <div class="task-conteiner ">
-        <div class="task-input d-flex w-25">
-          <input class="tsInput" type="text" placeholder="Add new task..." />
-          <p>Date to finnish the task:</p>
+    <main class="">
+      <h1 class="text-center p-5 display-1">Task Manager</h1>
+      <div class="task-conteiner text-center mx-auto">
+        <div class="task-input d-flex justify-content-center align-content-center">
+          <p class="h4">Task:</p>
+          <input class="tsInput " type="text" placeholder="Add new task..." />
+          <p class="h4">Date to finnish the task:</p>
           <input id="tsTime-limmit" placeholder= "mm/dd/yyyy"/ type="date">
           <button id="input-btn">Add</button>
         </div>
-        <div class="options cursor">
-          <span id="all">All</span>
-          <span id="uncompleted">Uncompleted</span>
-          <span id="completed">Completed</span>
+        <div class="d-flex options cursor p-4 justify-content-center align-content-center">
+          <span id="all" class="h5">All</span>
+          <span id="uncompleted" class="h5">Uncompleted</span>
+          <span id="completed" class="h5">Completed</span>
           <button id="clear">Clear/Delete all</button>
         </div>
-        <ul class="task-list"></ul>
+        <ul class="task-list mx-auto"></ul>
       </div>
     </main>
     <script src="../src/script.js" type="module"></script>

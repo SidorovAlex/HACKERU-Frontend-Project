@@ -3,35 +3,32 @@
   padding: 0;
   box-sizing: border-box;
 }
-
-li,
-ul {
+li{
   list-style: none;
-  padding-left: 0;
-  width: 50%;
-}
-.tast-options {
-  padding-right: 5px;
 }
 body {
   background: grey;
+  
+
+}
+p{
+  padding-left: 20px;
+  padding-right: 20px;
+}
+span{
+  padding-left: 20px;
+  padding-right: 20px;
+}
+button{
+  margin-left: 20px;
 }
 .cursor {
   cursor: pointer;
 }
-#task label {
-  width: 150px;
+main{
+margin-top: 100px;
 }
-#task input,
-p,
-span {
-  margin: auto;
-}
-.center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+
 
 .checked{
   text-decoration: line-through;
