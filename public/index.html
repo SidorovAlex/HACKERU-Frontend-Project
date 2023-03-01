@@ -10,27 +10,28 @@
       integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
       crossorigin="anonymous"
     />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css" />
     <title>Task Manager</title>
   </head>
   <body>
-    <main class="">
-      <h1 class="text-center p-5 display-1">Task Manager</h1>
-      <div class="task-conteiner text-center mx-auto">
-        <div class="task-input d-flex justify-content-center align-content-center">
-          <p class="h4">Task:</p>
-          <input class="tsInput " type="text" placeholder="Add new task..." />
-          <p class="h4">Date to finnish the task:</p>
-          <input id="tsTime-limmit" placeholder= "mm/dd/yyyy"/ type="date">
-          <button id="input-btn">Add</button>
+    <main class="vh-100">
+      <h1 class=" text-center p-5 display-1">Task Manager</h1>
+      <div class="">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <p class="col-12 col-md-10 col-xl-1 h4  text-center">Task:</p>
+          <input class="col-12 col-md-10 col-xl-3 tsInput " type="text" placeholder="Add new task..." />
+          <p class="col-12 col-md-10 col-xl-2 h4 text-center">Date to finnish the task:</p>
+          <input class="col-12 col-md-10 col-xl-3" id="tsTime-limmit" placeholder= "mm/dd/yyyy" type="date">
+          <button class="col-12 col-md-10 col-xl-2  btn btn-info ms-2 col-1s" id="input-btn">Add</button>
         </div>
-        <div class="d-flex options cursor p-4 justify-content-center align-content-center">
-          <span id="all" class="h5">All</span>
-          <span id="uncompleted" class="h5">Uncompleted</span>
-          <span id="completed" class="h5">Completed</span>
-          <button id="clear">Clear/Delete all</button>
+        <div class="nav nav-tabs mt-4 pb-2 justify-content-center align-items-center">
+          <span id="all" class="chose h5 m-1">All</span>
+          <span id="uncompleted" class="chose h5 m-1">Uncompleted</span>
+          <span id="completed" class="chose h5 m-1">Completed</span>
+          <button id="clear" class=" h5 m-1">Clear/Delete all</button>
         </div>
-        <ul class="task-list mx-auto"></ul>
+        <ul class="task-list text-center justify-content-center align-items-center m-0"></ul>
       </div>
     </main>
     <script src="../src/script.js" type="module"></script>

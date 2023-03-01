@@ -87,7 +87,11 @@ class TaskManager {
           }
         })
         
-        
+        checkBoxInp.classList.add("m-3","h5","col-12","col-md-12","col-xl-1");
+        taskSp.classList.add("m-3","h5","col-12","col-md-12","col-xl-1");
+        timeLeftToEnd.classList.add("m-3","h5","col-12","col-md-12","col-xl-1");
+        editBtn.classList.add("m-3","h5","col-12","col-md-12","col-xl-1");
+        deleteBtn.classList.add("m-3","h5","col-12","col-md-12","col-xl-1");
         list.appendChild(checkBoxInp);
         list.appendChild(taskSp);
         list.appendChild(timeLeftToEnd);
