@@ -48,7 +48,6 @@ class TaskManager {
         })
 
         const inpDate = new Date(task.dateToEnd);
-
         const day = inpDate.getDate();
         const month = inpDate.getMonth()+1;
         const year = inpDate.getFullYear();
@@ -73,10 +72,12 @@ class TaskManager {
           {
             editBtn.innerHTML = "Save";
             taskSp.setAttribute("contenteditable",true);
+            taskSp.classList.add("cursor")
           }
           else{
             editBtn.innerText = "Edit";
             taskSp.setAttribute("contenteditable",false);
+            taskSp.classList.remove("cursor")
             task.theTask= taskSp.innerText;
             addItemToLocalStorage("task-list",JSON.stringify(this.TaskManager));
           }
@@ -145,8 +146,12 @@ class TaskManager {
             }
           })
           
-  
-          timeLeftToEnd.innerText = "End date of the task: " + task.dateToEnd.toString();
+          const inpDate = new Date(task.dateToEnd);
+        const day = inpDate.getDate();
+        const month = inpDate.getMonth()+1;
+        const year = inpDate.getFullYear();
+
+        timeLeftToEnd.innerText = `End date of the task: ${day}-${month}-${year}`;
           taskSp.innerText = task.theTask;
   
           
@@ -166,14 +171,15 @@ class TaskManager {
             {
               editBtn.innerHTML = "Save";
               taskSp.setAttribute("contenteditable",true);
+              taskSp.classList.add("cursor")
             }
             else{
               editBtn.innerText = "Edit";
               taskSp.setAttribute("contenteditable",false);
+              taskSp.classList.remove("cursor")
               task.theTask= taskSp.innerText;
               addItemToLocalStorage("task-list",JSON.stringify(this.TaskManager));
-            }
-          });
+            }});
   
           checkBoxInp.classList.add("m-3","h5","col-12","col-md-12","col-xl-1");
         taskSp.classList.add("m-3","h5","col-12","col-md-12","col-xl-1");
@@ -207,7 +213,7 @@ class TaskManager {
         checkBoxInp.setAttribute("type","checkbox");
         
         if(task.status === "Uncompleted"){
-          timeLeftToEnd.innerText = "End date of the task: " +task.dateToEnd;
+          
         taskSp.innerText = task.theTask;
         taskSp.innerText = task.theTask;
         deleteBtn.innerText = "Delete";
@@ -220,14 +226,16 @@ class TaskManager {
           this.deleteTask(task.id);
         });
         editBtn.addEventListener("click",()=>{
-          if(editeBtn.innerText === "Edit")
+          if(editBtn.innerText === "Edit")
           {
-            editeBtn.innerHTML = "Save";
+            editBtn.innerHTML = "Save";
             taskSp.setAttribute("contenteditable",true);
+            taskSp.classList.add("cursor")
           }
           else{
-            editeBtn.innerText = "Edit";
+            editBtn.innerText = "Edit";
             taskSp.setAttribute("contenteditable",false);
+            taskSp.classList.remove("cursor")
             task.theTask= taskSp.innerText;
             addItemToLocalStorage("task-list",JSON.stringify(this.TaskManager));
           }
@@ -249,9 +257,12 @@ class TaskManager {
           }
         })
 
-        
-
-        timeLeftToEnd.innerText = "End date of the task: " + task.dateToEnd.toString();
+        const inpDate = new Date(task.dateToEnd);
+          const day = inpDate.getDate();
+          const month = inpDate.getMonth()+1;
+          const year = inpDate.getFullYear();
+  
+          timeLeftToEnd.innerText = `End date of the task: ${day}-${month}-${year}`;
         taskSp.innerText = task.theTask;
 
         
