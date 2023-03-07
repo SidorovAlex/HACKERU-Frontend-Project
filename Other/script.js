@@ -1,3 +1,5 @@
+import runners from "./animals.js";
+
 //#region Color picker
 const redInp = document.querySelector("#r");
 const greenInp = document.querySelector("#g");
@@ -48,4 +50,33 @@ sortArrBtn.addEventListener("click",()=>{
         }
     }
 })
+//#endregion
+
+//#region gamble games
+const zeroBtn = document.querySelector("#zeroLine");
+const choseAnimalBtn = document.querySelector("#choseAnimal");
+
+let stepCounter=[];
+const initCounter = ()=>{
+
+    for (const key in runners) {
+        stepCounter.push(0);
+    }
+    
+}
+const randAnimal = () =>{
+    let rand = Math.floor(Math.random(4))
+    return runners[rand];
+}
+zeroBtn.addEventListener("click",initCounter());
+
+choseAnimalBtn.addEventListener("click",()=>{
+    let randomAn = randAnimal();
+    console.log(randomAn);
+})
+
+
+
+
+
 //#endregion
