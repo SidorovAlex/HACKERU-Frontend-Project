@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!--Color picker-->
+    <div class="conteiner">
+        <h2>Enter RGB numbers to pick a color</h2>
+        <br>
+        <span>First (RED):</span> <input id="r" type="number" min="0" max="256">
+        <span>Second (GREEN):</span> <input id="g" type="number" min="0" max="256">
+        <span>Third (BLUE):</span> <input id="b" type="number" min="0" max="256">
+        <br>
+        <button class="buttons" id="firstBtn">Add color to first block</button>
+        <button class="buttons" id="secondBtn">Add color to second block</button>
+        <div class="block-conteiner">
+            <div id="color-block1" class="block"></div>
+            <div id="color-block2"  class="block"></div>
+        </div>
+    </div>
+
+    <!--Array sorting-->
+    <div class="conteiner">
+        <label for="array">Input values</label>
+        <input id="numToArray" type="number" placeholder="Enter number">
+        <button id="addNumBtn">Add number to array</button>
+        <button id="sortArrBtn">Sort the array</button>
+        <button id="showArrBtn">Show the array</button>
+        <br>
+        <span id="showArr"></span>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

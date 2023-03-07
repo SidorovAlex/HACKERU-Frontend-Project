@@ -1,0 +1,19 @@
+.block{
+    height: 150px;
+    width: 150px;
+    margin-top: 25px;
+    margin-left: 70px;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+}
+.block-conteiner{
+    display: flex;
+}
+.buttons{
+    margin-top: 20px;
+    margin-left: 70px;
+}
+.conteiner{
+    margin-bottom: 50px;
+}
