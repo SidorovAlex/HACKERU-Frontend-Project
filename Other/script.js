@@ -23,18 +23,24 @@ const showArrBtn = document.querySelector("#showArrBtn");
 const showArr=document.querySelector("#showArr");
 
 let arr = [];
-addNumBtn.addEventListener("click",()=>arr.push(parseInt(numInp.value)))
+addNumBtn.addEventListener("click",()=>{
+    arr.push(parseInt(numInp.value))
+    numInp.value="";
+})
 showArrBtn.addEventListener("click",()=>{
-    arr.forEach(num =>{
-        showArr.textContent+=num;
-        showArr.textContent += ',';
-    })
+    showArr.textContent=""
+    showArr.textContent+="[";
+    for(let i=0;i<arr.length;i++){
+        showArr.textContent+=arr[i];
+        if(i!==arr.length-1)
+            showArr.textContent+=',';
+    }
+    showArr.textContent+="]";
 });
 sortArrBtn.addEventListener("click",()=>{
     for(let i=0;i<arr.length-1;i++){
         if(arr[i]>arr[i+1])
         {
-            console.log(arr);
             let temp = arr[i];
             arr[i] = arr[i+1];
             arr[i+1] =temp;
