@@ -53,7 +53,7 @@ sortArrBtn.addEventListener("click",()=>{
 })
 //#endregion
 
-//#region gamble games
+//#region Animal gamble
 
 const zeroBtn = document.querySelector("#zeroLine");
 const choseAnimalBtn = document.querySelector("#choseAnimal");
