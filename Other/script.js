@@ -1,4 +1,5 @@
 import runners from "./animals.js";
+import json_ar from "./richPeople.js"
 
 //#region Color picker
 const redInp = document.querySelector("#r");
@@ -128,5 +129,38 @@ choseAnimalBtn.addEventListener("click",()=>{
 //#endregion
 
 //#region Isolate the rich characters
+const richPeople = document.querySelector(".rich-people-conteiner");
+
+json_ar.map((person) => {
+    let clicked=false;
+    const span = document.createElement("span");
+    const img = document.createElement("img");
+    const br = document.createElement("br")
+    img.src= person.image;
+    const name = person.name;
+    const worth = person.worth;
+    const source = person.source;
+    span.textContent =`name: ${name}, worth: ${worth}, money source: ${source}`
+    span.classList.add("cursor");
+    img.classList.add("cursor");
+    richPeople.appendChild(span);
+    richPeople.appendChild(img);
+    richPeople.appendChild(br);
+   
+
+    img.addEventListener("click",()=>{
+        richPeople.removeChild(span);
+        richPeople.removeChild(img);
+        richPeople.removeChild(br);
+    })
+    span.addEventListener("click",()=>{
+        richPeople.removeChild(span);
+        richPeople.removeChild(img);
+        richPeople.removeChild(br);
+    })
+
+    
+});
+
 
 //#endregion
